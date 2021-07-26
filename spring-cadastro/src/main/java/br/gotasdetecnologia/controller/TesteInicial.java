@@ -24,11 +24,12 @@ public class TesteInicial {
 		
 		usuarioRepository.save(usuario);
 		
-		return "Usuario cadastrado" +name;
+		return "Usuario cadastrado: " +name;
 		
 	}
 	
 	@Autowired
+	//Tem de colocar para mostrar a dependencia ("injeção")
 	private UsuarioRepository usuarioRepository;
 	
 	
