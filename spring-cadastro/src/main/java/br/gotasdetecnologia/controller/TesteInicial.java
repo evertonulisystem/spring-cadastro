@@ -75,6 +75,7 @@ public class TesteInicial {
 	//Uso do Postman	
 	}
 	
+	//Localizar para editar, deletar...
 	@GetMapping ("/buscaruserid")
 	@ResponseBody
 	public ResponseEntity<Usuario> buscaruserid(@RequestParam (name = "iduser") Long iduser){
