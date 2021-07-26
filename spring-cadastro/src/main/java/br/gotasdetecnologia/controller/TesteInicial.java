@@ -1,18 +1,23 @@
 package br.gotasdetecnologia.controller;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.gotasdetecnologia.repository.UsuarioRepository;
 import br.gotasdetecnologia.model.Usuario;
+import br.gotasdetecnologia.repository.UsuarioRepository;
 
 @RestController
 public class TesteInicial {
@@ -37,14 +42,38 @@ public class TesteInicial {
 	//se tirar linha 25 não é encontrada
 	private UsuarioRepository usuarioRepository;
 	
-	@GetMapping(value="listatodos")
+	@GetMapping("/listatodos")
 	@ResponseBody //retorna os dados para o corpo da resposta em json
-	public ResponseEntity<List<Usuario>> listaUsuario(){
+	public ResponseEntity<List<Usuario>> listaUsuario()
+	{
 		List<Usuario> usuarios = usuarioRepository.findAll();//executa consulta no BD
 		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
+	
+	}
+	
+	@PostMapping ("/salvar") //mapeando a url
+	@ResponseBody  //descrição da resposta
+	public ResponseEntity<Usuario> salvar (@RequestBody Usuario usuario)
+	{//recebe os dados para salvar
+		
+		Usuario user = usuarioRepository.save(usuario);
+									
+		return new ResponseEntity<Usuario>(user, HttpStatus.CREATED);
+	}
+	
+	//Mapeamento
+	//REquisição
+	//Resposta de Dados
+	@DeleteMapping ("/apagar")
+	@ResponseBody
+	public ResponseEntity<String> delete(@RequestParam Long iduser){
+		
+		usuarioRepository.deleteById(iduser);
+		return new ResponseEntity<String>("Usuario deletado", HttpStatus.OK);
 		
 	}
 	
 	
-
-}
+	
+	
+	}
