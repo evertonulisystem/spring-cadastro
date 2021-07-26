@@ -14,7 +14,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
 	
 	//buscar por parte do nome. Pois não é um padrao do CRUD. Implementar
 	
-	@Query(value = "select u from Usuario u where u.nome like %?1%")
+	@Query(value = "select u from Usuario u where upper(trim(u.nome)) like %?1%")
 	List<Usuario> buscarPorNome(String name);
 	
 	
