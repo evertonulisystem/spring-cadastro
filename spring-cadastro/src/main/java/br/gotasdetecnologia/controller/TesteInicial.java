@@ -86,8 +86,20 @@ public class TesteInicial {
 	//Uso do Postman	
 	}
 	
-	
-	
+	@PutMapping ("/atualizar") //mapeando a url
+	@ResponseBody  //descrição da resposta
+	public ResponseEntity<?> atualizar (@RequestBody Usuario usuario)
+	{
+		//no postman apague a linha do ID
+		if (usuario.getId()==null) {
+			return new ResponseEntity<String> ("Id nao localizado", HttpStatus.OK);
+			
+		}
+		
+		Usuario user = usuarioRepository.saveAndFlush(usuario);
+									
+		return new ResponseEntity<Usuario>(user, HttpStatus.OK);
+	}
 	
 	
 	
