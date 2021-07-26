@@ -14,7 +14,10 @@ public class TesteInicial {
 	@ResponseStatus(HttpStatus.OK)
 	public String testeText(@PathVariable String name) {
 		return "Curso Spring REST" +name;
-		
 	}
+	
+
+
+	
 }
 
