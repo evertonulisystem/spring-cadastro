@@ -69,8 +69,9 @@ public class TesteInicial {
 	public ResponseEntity<String> delete(@RequestParam Long iduser){
 		
 		usuarioRepository.deleteById(iduser);
-		return new ResponseEntity<String>("Usuario deletado", HttpStatus.OK);
 		
+		return new ResponseEntity<String>("Usuario deletado", HttpStatus.OK);
+	//Uso do Postman	
 	}
 	
 	
